@@ -44,10 +44,9 @@ public class GameObj
     }
     
     //ONLY USING THIS TO TEST MOUSE MOVEMENT
-    public void setX(int units)
-    {
-    	topX = units;
-    }
+	/*
+	 * public void setX(int units) { topX = units; }
+	 */
 
     // change direction of movement in x axis (-1, 0 or +1)
     public void changeDirectionX()

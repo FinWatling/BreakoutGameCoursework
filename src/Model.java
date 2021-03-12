@@ -284,7 +284,7 @@ public class Model
     
     public synchronized void moveBatMouse(int x)
     {
-    	bat.setX(x);
+    	//bat.setX(x);
     }
     
     

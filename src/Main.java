@@ -36,7 +36,7 @@ public class Main extends Application
         //IMPORTING THE AUDIO
         GameMedia gm = new GameMedia();
         gm = new GameMedia();
-        gm.playSound();
+        gm.playMainTheme();
 
         // Link them together so they can talk to each other
         // Each one has instance variables for the other two
