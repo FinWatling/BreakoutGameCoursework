@@ -12,10 +12,10 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.*;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import java.awt.event.MouseEvent;
 
 public class View implements EventHandler<KeyEvent>
 { 
+	MouseLocation mouselocation;
 	// variables for components of the user interface
     public int width;       // width of window
     public int height;      // height of window
@@ -79,46 +79,21 @@ public class View implements EventHandler<KeyEvent>
         // whenever a key is pressed
         scene.setOnKeyPressed(this);
         
-        
-        
-        
-        //TESTING TODO:FIX
-        scene.getOnMouseDragged();
+        scene.setOnMouseMoved(new EventHandler<javafx.scene.input.MouseEvent>() { //this was one of the hardest things I have EVER had to do!
+        	
+			public void handle(javafx.scene.input.MouseEvent e) {  //attempting to get the bat to follow the mouse instead of using keys to control direction.
+				  // send the event to the controller
+				  controller.userMouseInteraction(e);
+				 
+				}
 
-        
-        
-        
+			});
         
         // put the scene in the window and display it
         window.setScene(scene);
         window.show();
     }
-
-    // Event handler for key presses - it just passes the event to the controller
-    public void handle(KeyEvent event){
-        // send the event to the controller
-        controller.userKeyInteraction( event );
-    }
-    
-    
-    
-    
-    
-    
-    //TODO: GET THIS WORKING
-
-	
-	  public void handle(MouseEvent e) {  //attempting to get the bat to follow the mouse instead of using keys to control direction.
-	  // send the event to the controller
-	  controller.userMouseInteraction( e ); 
-	  }
-	 
-	  
-	  
-	  
-	  
-	  
-	  
+  
     
     // drawing the game image
     public void drawPicture()
@@ -172,4 +147,12 @@ public class View implements EventHandler<KeyEvent>
         //Debug.trace("Update");
         drawPicture();                     // Re draw game
     }
+
+	@Override
+	public void handle(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 }

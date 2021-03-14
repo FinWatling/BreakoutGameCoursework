@@ -43,10 +43,10 @@ public class GameObj
         topY += units * dirY;
     }
     
-    //ONLY USING THIS TO TEST MOUSE MOVEMENT
-	/*
-	 * public void setX(int units) { topX = units; }
-	 */
+    public void setX(int x) {
+		topX = x;
+		
+	}
 
     // change direction of movement in x axis (-1, 0 or +1)
     public void changeDirectionX()
@@ -77,5 +77,7 @@ public class GameObj
         return(! separate);  
           
     }
+
+	
 
 }

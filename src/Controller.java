@@ -2,7 +2,7 @@
 // into commands for the game (in the Model object)
 
 // we need to use on JavaFX class
-import java.awt.event.MouseEvent;
+import javafx.scene.input.MouseEvent;
 
 import javafx.scene.input.KeyEvent;
 
@@ -60,24 +60,22 @@ public class Controller {
   }
   
   
-  	//TODO: GET THIS WORKING
+  	//TODO: GOT THIS WORKING!! HOORAY
 
 	
 	  public void userMouseInteraction(MouseEvent e) {
 		  
+		  System.out.println(e.getX());
+		  model.moveBatMouse((int) e.getX());
 		  
-		  if ((e.getX() > 0) && (e.getX() < view.width)) {
-			  
-			  model.moveBatMouse(e.getX());
-			
-			  
-		  }
-	  
-	  
-	  
-	  
-	  
-	  
+			/*
+			 * if ((e.getX() > 0) && (e.getX() < view.width)) {
+			 * 
+			 * model.moveBatMouse((int) e.getX());
+			 * 
+			 * 
+			 * }
+			 */
 	  }
 	 
 
