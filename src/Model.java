@@ -10,21 +10,20 @@ import javafx.application.Platform;
 
 public class Model 
 {
-    // First,a collection of useful values for calculating sizes and layouts etc.
 
     public int B              = 6;      // Border round the edge of the panel
     public int M              = 40;     // Height of menu bar space at the top
 
-    public int BALL_SIZE      = 30;     // Ball side
-    public int BRICK_WIDTH    = 75;     // Brick size def 50
-    public int BRICK_HEIGHT   = 40;		// Brick height def 30
+    public int BALL_SIZE      = 30;  
+    public int BRICK_WIDTH    = 75;     
+    public int BRICK_HEIGHT   = 40;		
 
     public int BAT_MOVE       = 8;      // Distance to move bat on each keypress
     public int BALL_MOVE      = 4;      // Units to move the ball on each step
 
-    public int HIT_BRICK      = 50;     // Score for hitting a brick
-    public int HIT_BOTTOM     = -200;   // Score (penalty) for hitting the bottom of the screen
-    public int BRICK_X = 100; 			//def 200
+    public int HIT_BRICK      = 100;     // Points for hitting a brick
+    public int HIT_BOTTOM     = -100;   // Points Penalty for hitting the bottom of the screen
+    public int BRICK_X = 100; 			// Used to display rows of bricks
 
     // The other parts of the model-view-controller setup
     View view;
@@ -33,6 +32,7 @@ public class Model
     // The game 'model' - these represent the state of the game
     // and are used by the View to display it
     public GameObj ball;                // The ball
+    public GameObj ball2;				// Second ball
     public GameObj[] bricks;            // The bricks
     public GameObj bat;                 // The bat
     public int score = 0;               // The score
@@ -83,39 +83,40 @@ public class Model
     }   
     
     // Initialise the game - reset the score and create the game objects 
+    //TODO: Get this nice and neat in a loop.
     public void initialiseGame()
     {       
         score = 0;
-        ball   = new GameObj(width/2, height/2, BALL_SIZE, BALL_SIZE, Color.BLACK );
-        bat    = new GameObj(width/2, height - BRICK_HEIGHT*3/2, BRICK_WIDTH*2, BRICK_HEIGHT/4, Color.GREY);
+        ball   = new GameObj(width/2, height/2, BALL_SIZE, BALL_SIZE, Color.BLACK,1);
+        bat    = new GameObj(width/2, height - BRICK_HEIGHT*3/2, BRICK_WIDTH*2, BRICK_HEIGHT/4, Color.GREY,1);
         
         bricks = new GameObj[]{
-        new GameObj(0, BRICK_X, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK ), //first row of 8
-        new GameObj(BRICK_WIDTH, BRICK_X, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK),
-        new GameObj(BRICK_WIDTH*2, BRICK_X, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK),
-        new GameObj(BRICK_WIDTH*3, BRICK_X, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK),
-        new GameObj(BRICK_WIDTH*4, BRICK_X, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK),
-        new GameObj(BRICK_WIDTH*5, BRICK_X, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK),
-        new GameObj(BRICK_WIDTH*6, BRICK_X, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK),
-        new GameObj(BRICK_WIDTH*7, BRICK_X, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK),
+        new GameObj(0, BRICK_X, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK,3), //first row of 8
+        new GameObj(BRICK_WIDTH, BRICK_X, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK,3),
+        new GameObj(BRICK_WIDTH*2, BRICK_X, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK,3),
+        new GameObj(BRICK_WIDTH*3, BRICK_X, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK,3),
+        new GameObj(BRICK_WIDTH*4, BRICK_X, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK,3),
+        new GameObj(BRICK_WIDTH*5, BRICK_X, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK,3),
+        new GameObj(BRICK_WIDTH*6, BRICK_X, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK,3),
+        new GameObj(BRICK_WIDTH*7, BRICK_X, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK,3),
         
-        new GameObj(0, BRICK_X+BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK ), //second row of 8
-        new GameObj(BRICK_WIDTH, BRICK_X+BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK),
-        new GameObj(BRICK_WIDTH*2, BRICK_X+BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK),
-        new GameObj(BRICK_WIDTH*3, BRICK_X+BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK),
-        new GameObj(BRICK_WIDTH*4, BRICK_X+BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK),
-        new GameObj(BRICK_WIDTH*5, BRICK_X+BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK),
-        new GameObj(BRICK_WIDTH*6, BRICK_X+BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK),
-        new GameObj(BRICK_WIDTH*7, BRICK_X+BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK),
+        new GameObj(0, BRICK_X+BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK,3), //second row of 8
+        new GameObj(BRICK_WIDTH, BRICK_X+BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK,3),
+        new GameObj(BRICK_WIDTH*2, BRICK_X+BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK,3),
+        new GameObj(BRICK_WIDTH*3, BRICK_X+BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK,3),
+        new GameObj(BRICK_WIDTH*4, BRICK_X+BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK,3),
+        new GameObj(BRICK_WIDTH*5, BRICK_X+BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK,3),
+        new GameObj(BRICK_WIDTH*6, BRICK_X+BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK,3),
+        new GameObj(BRICK_WIDTH*7, BRICK_X+BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK,3),
         
-        new GameObj(0, BRICK_X+(BRICK_HEIGHT*2), BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK ), //third row of 8
-        new GameObj(BRICK_WIDTH, BRICK_X+(BRICK_HEIGHT*2), BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK),
-        new GameObj(BRICK_WIDTH*2, BRICK_X+(BRICK_HEIGHT*2), BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK),
-        new GameObj(BRICK_WIDTH*3, BRICK_X+(BRICK_HEIGHT*2), BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK),
-        new GameObj(BRICK_WIDTH*4, BRICK_X+(BRICK_HEIGHT*2), BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK),
-        new GameObj(BRICK_WIDTH*5, BRICK_X+(BRICK_HEIGHT*2), BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK),
-        new GameObj(BRICK_WIDTH*6, BRICK_X+(BRICK_HEIGHT*2), BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK),
-        new GameObj(BRICK_WIDTH*7, BRICK_X+(BRICK_HEIGHT*2), BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK)
+        new GameObj(0, BRICK_X+(BRICK_HEIGHT*2), BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK,3), //third row of 8
+        new GameObj(BRICK_WIDTH, BRICK_X+(BRICK_HEIGHT*2), BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK,3),
+        new GameObj(BRICK_WIDTH*2, BRICK_X+(BRICK_HEIGHT*2), BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK,3),
+        new GameObj(BRICK_WIDTH*3, BRICK_X+(BRICK_HEIGHT*2), BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK,3),
+        new GameObj(BRICK_WIDTH*4, BRICK_X+(BRICK_HEIGHT*2), BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK,3),
+        new GameObj(BRICK_WIDTH*5, BRICK_X+(BRICK_HEIGHT*2), BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK,3),
+        new GameObj(BRICK_WIDTH*6, BRICK_X+(BRICK_HEIGHT*2), BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK,3),
+        new GameObj(BRICK_WIDTH*7, BRICK_X+(BRICK_HEIGHT*2), BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK,3)
         
         
         };
@@ -277,11 +278,7 @@ public class Model
     
     
     
-    
-    
-    
-    //THE FOLLOWING IS IN PROGRESS TO TEST MOUSE MOVEMENT
-    
+    //sets the bat's X position to the position of the mouse
     public synchronized void moveBatMouse(int x)
     {
     	bat.setX(x);

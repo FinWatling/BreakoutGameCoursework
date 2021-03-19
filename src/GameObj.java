@@ -21,7 +21,7 @@ public class GameObj
     public int objlives = 1;
 
 
-    public GameObj( int x, int y, int w, int h, Color c)
+    public GameObj( int x, int y, int w, int h, Color c, int ol)
     {
         topX   = x;       
         topY = y;
@@ -43,6 +43,7 @@ public class GameObj
         topY += units * dirY;
     }
     
+    //sets the bat's X position
     public void setX(int x) {
 		topX = x;
 		

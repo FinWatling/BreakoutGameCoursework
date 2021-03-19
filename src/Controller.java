@@ -59,23 +59,15 @@ public class Controller {
     }
   }
   
-  
-  	//TODO: GOT THIS WORKING!! HOORAY
-
 	
 	  public void userMouseInteraction(MouseEvent e) {
 		  
 		  System.out.println(e.getX());
-		  model.moveBatMouse((int) e.getX());
 		  
-			/*
-			 * if ((e.getX() > 0) && (e.getX() < view.width)) {
-			 * 
-			 * model.moveBatMouse((int) e.getX());
-			 * 
-			 * 
-			 * }
-			 */
+		  if(e.getX() < 450){
+		  model.moveBatMouse((int) e.getX());
+		  }
+		  
 	  }
 	 
 

@@ -13,9 +13,9 @@ import javafx.scene.paint.*;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class View implements EventHandler<KeyEvent>
+public class View 
 { 
-	MouseLocation mouselocation;
+	
 	// variables for components of the user interface
     public int width;       // width of window
     public int height;      // height of window
@@ -77,7 +77,17 @@ public class View implements EventHandler<KeyEvent>
         // Add an event handler for key presses. By using 'this' (which means 'this 
         // view object itself') we tell JavaFX to call the 'handle' method (below)
         // whenever a key is pressed
-        scene.setOnKeyPressed(this);
+        
+       
+        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+        		
+        	public void handle(KeyEvent event) {  //attempting to get the bat to follow the mouse instead of using keys to control direction.
+				  // send the event to the controller
+				  controller.userKeyInteraction(event);
+				 
+				}
+        		
+        	});
         
         scene.setOnMouseMoved(new EventHandler<javafx.scene.input.MouseEvent>() { //this was one of the hardest things I have EVER had to do!
         	
@@ -115,6 +125,7 @@ public class View implements EventHandler<KeyEvent>
             displayGameObj( gc, bat  );   // Display the Bat
             
             //draw the bricks
+            
             for (GameObj brick : bricks) {
             if (brick.visible) {
             displayGameObj(gc, brick);
@@ -148,11 +159,8 @@ public class View implements EventHandler<KeyEvent>
         drawPicture();                     // Re draw game
     }
 
-	@Override
-	public void handle(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+	
+
 
 
 }
