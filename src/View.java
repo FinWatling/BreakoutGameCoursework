@@ -134,7 +134,7 @@ public class View
 
             
             // update the score
-            infoText.setText("BreakOut: Score = " + score);
+            infoText.setText("Score:  " + score);
         }
     }
 
