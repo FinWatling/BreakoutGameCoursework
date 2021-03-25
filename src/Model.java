@@ -150,6 +150,8 @@ public class Model
     // updating the game - this happens about 50 times a second to give the impression of movement
     public synchronized void updateGame()
     {
+        GameMedia gm = new GameMedia();
+        
         // move the ball one step (the ball knows which direction it is moving in)
         ball.moveX(BALL_MOVE);                      
         ball.moveY(BALL_MOVE);
@@ -181,6 +183,7 @@ public class Model
         	
         	addToScore( HIT_BRICK);
         	hit = true;
+        	gm.PlayBreakSound();
         	brick.visible = false;
         }}
         
@@ -191,6 +194,7 @@ public class Model
         
         // check whether ball has hit the bat
         if ( ball.hitBy(bat) ) {
+        	gm.PlayHitSound();
             ball.changeDirectionY();
         }
         

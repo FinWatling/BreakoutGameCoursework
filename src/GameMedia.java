@@ -1,5 +1,6 @@
-import java.io.File;
+import java.nio.file.Paths;
 import javafx.scene.media.Media;
+import javafx.scene.media.AudioClip;
 import javafx.scene.media.MediaPlayer;
 
 /**
@@ -19,13 +20,27 @@ public class GameMedia {
 	 */
 	public void playMainTheme() {
 		
-		String sound = "res/backgroundMusic.mp3";
-	    Media media = new Media(new File(sound).toURI().toString());
+		String theme = "res/backgroundMusic.mp3";
+	    Media media = new Media(Paths.get(theme).toUri().toString());
 	    MediaPlayer player = new MediaPlayer(media);
 	    player.setVolume(0.1); //no volume for testing the rest of the program.. very annoying after a few hours!!
 	    player.play();
 	    
 	  }
+	
+	public void PlayHitSound() {
+		
+		AudioClip sound = new AudioClip(Paths.get("res/ballhit.wav").toUri().toString());
+		sound.play();
+		
+	}
+	
+	public void PlayBreakSound() {
+		
+		AudioClip sound = new AudioClip(Paths.get("res/brickhit.wav").toUri().toString());
+		sound.play();
+		
+	}
 
 	  
 	  

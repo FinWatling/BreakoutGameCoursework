@@ -35,7 +35,6 @@ public class Main extends Application
         
         //IMPORTING THE AUDIO
         GameMedia gm = new GameMedia();
-        gm = new GameMedia();
         gm.playMainTheme();
 
         // Link them together so they can talk to each other
