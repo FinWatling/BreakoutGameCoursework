@@ -20,7 +20,7 @@ public class GameMedia {
 	 */
 	public void playMainTheme() {
 		
-		String theme = "res/backgroundMusic.mp3";
+		final String theme = "res/backgroundMusic.mp3";
 	    Media media = new Media(Paths.get(theme).toUri().toString());
 	    MediaPlayer player = new MediaPlayer(media);
 	    player.setVolume(0.1); //no volume for testing the rest of the program.. very annoying after a few hours!!
@@ -30,14 +30,14 @@ public class GameMedia {
 	
 	public void PlayHitSound() {
 		
-		AudioClip sound = new AudioClip(Paths.get("res/ballhit.wav").toUri().toString());
+		final AudioClip sound = new AudioClip(Paths.get("res/ballhit.wav").toUri().toString());
 		sound.play();
 		
 	}
 	
 	public void PlayBreakSound() {
 		
-		AudioClip sound = new AudioClip(Paths.get("res/brickhit.wav").toUri().toString());
+		final AudioClip sound = new AudioClip(Paths.get("res/brickhit.wav").toUri().toString());
 		sound.play();
 		
 	}

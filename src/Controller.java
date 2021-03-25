@@ -62,8 +62,6 @@ public class Controller {
 	
 	  public void userMouseInteraction(MouseEvent e) {
 		  
-		  System.out.println(e.getX());
-		  
 		  if(e.getX() < 450){
 		  model.moveBatMouse((int) e.getX());
 		  }
