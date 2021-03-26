@@ -19,7 +19,7 @@ public class Model
     public int BRICK_HEIGHT   = 40;		
 
     public int BAT_MOVE       = 8;      // Distance to move bat on each keypress
-    public int BALL_MOVE      = 4;      // Units to move the ball on each step
+    public int BALL_MOVE      = 2;      // Units to move the ball on each step
 
     public int HIT_BRICK      = 100;     // Points for hitting a brick
     public int HIT_BOTTOM     = -100;   // Points Penalty for hitting the bottom of the screen
@@ -32,8 +32,8 @@ public class Model
     // The game 'model' - these represent the state of the game
     // and are used by the View to display it
     public GameObj ball;                // The ball
-    public GameObj ball2;				// Second ball
-    public GameObj[] bricks;            // The bricks
+    public GameObj[] bricks;    		// The bricks
+    public PersistentGameObj[] healthbricks;// Bricks with Health
     public GameObj bat;                 // The bat
     public int score = 0;               // The score
 
@@ -87,36 +87,44 @@ public class Model
     public void initialiseGame()
     {       
         score = 0;
-        ball   = new GameObj(width/2, height/2, BALL_SIZE, BALL_SIZE, Color.BLACK,1);
-        bat    = new GameObj(width/2, height - BRICK_HEIGHT*3/2, BRICK_WIDTH*2, BRICK_HEIGHT/4, Color.GREY,1);
+        ball   = new GameObj(width/2, height/2, BALL_SIZE, BALL_SIZE, Color.BLACK);
+        bat    = new GameObj(width/2, height - BRICK_HEIGHT*3/2, BRICK_WIDTH*2, BRICK_HEIGHT/4, Color.GREY);
+        
+        healthbricks = new PersistentGameObj[]{
+        new PersistentGameObj(0, BRICK_X+(BRICK_HEIGHT*3), BRICK_WIDTH, BRICK_HEIGHT, Color.GOLD, 3),
+        new PersistentGameObj(BRICK_WIDTH, BRICK_X+(BRICK_HEIGHT*3), BRICK_WIDTH, BRICK_HEIGHT, Color.GOLD, 3)
+        		
+        		
+        };
+        
         
         bricks = new GameObj[]{
-        new GameObj(0, BRICK_X, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK,3), //first row of 8
-        new GameObj(BRICK_WIDTH, BRICK_X, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK,3),
-        new GameObj(BRICK_WIDTH*2, BRICK_X, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK,3),
-        new GameObj(BRICK_WIDTH*3, BRICK_X, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK,3),
-        new GameObj(BRICK_WIDTH*4, BRICK_X, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK,3),
-        new GameObj(BRICK_WIDTH*5, BRICK_X, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK,3),
-        new GameObj(BRICK_WIDTH*6, BRICK_X, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK,3),
-        new GameObj(BRICK_WIDTH*7, BRICK_X, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK,3),
+        new GameObj(0, BRICK_X, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK), //first row of 8
+        new GameObj(BRICK_WIDTH, BRICK_X, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK),
+        new GameObj(BRICK_WIDTH*2, BRICK_X, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK),
+        new GameObj(BRICK_WIDTH*3, BRICK_X, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK),
+        new GameObj(BRICK_WIDTH*4, BRICK_X, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK),
+        new GameObj(BRICK_WIDTH*5, BRICK_X, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK),
+        new GameObj(BRICK_WIDTH*6, BRICK_X, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK),
+        new GameObj(BRICK_WIDTH*7, BRICK_X, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK),
         
-        new GameObj(0, BRICK_X+BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK,3), //second row of 8
-        new GameObj(BRICK_WIDTH, BRICK_X+BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK,3),
-        new GameObj(BRICK_WIDTH*2, BRICK_X+BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK,3),
-        new GameObj(BRICK_WIDTH*3, BRICK_X+BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK,3),
-        new GameObj(BRICK_WIDTH*4, BRICK_X+BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK,3),
-        new GameObj(BRICK_WIDTH*5, BRICK_X+BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK,3),
-        new GameObj(BRICK_WIDTH*6, BRICK_X+BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK,3),
-        new GameObj(BRICK_WIDTH*7, BRICK_X+BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK,3),
+        new GameObj(0, BRICK_X+BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK), //second row of 8
+        new GameObj(BRICK_WIDTH, BRICK_X+BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK),
+        new GameObj(BRICK_WIDTH*2, BRICK_X+BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK),
+        new GameObj(BRICK_WIDTH*3, BRICK_X+BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK),
+        new GameObj(BRICK_WIDTH*4, BRICK_X+BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK),
+        new GameObj(BRICK_WIDTH*5, BRICK_X+BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK),
+        new GameObj(BRICK_WIDTH*6, BRICK_X+BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK),
+        new GameObj(BRICK_WIDTH*7, BRICK_X+BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK),
         
-        new GameObj(0, BRICK_X+(BRICK_HEIGHT*2), BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK,3), //third row of 8
-        new GameObj(BRICK_WIDTH, BRICK_X+(BRICK_HEIGHT*2), BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK,3),
-        new GameObj(BRICK_WIDTH*2, BRICK_X+(BRICK_HEIGHT*2), BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK,3),
-        new GameObj(BRICK_WIDTH*3, BRICK_X+(BRICK_HEIGHT*2), BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK,3),
-        new GameObj(BRICK_WIDTH*4, BRICK_X+(BRICK_HEIGHT*2), BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK,3),
-        new GameObj(BRICK_WIDTH*5, BRICK_X+(BRICK_HEIGHT*2), BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK,3),
-        new GameObj(BRICK_WIDTH*6, BRICK_X+(BRICK_HEIGHT*2), BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK,3),
-        new GameObj(BRICK_WIDTH*7, BRICK_X+(BRICK_HEIGHT*2), BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK,3)
+        new GameObj(0, BRICK_X+(BRICK_HEIGHT*2), BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK), //third row of 8
+        new GameObj(BRICK_WIDTH, BRICK_X+(BRICK_HEIGHT*2), BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK),
+        new GameObj(BRICK_WIDTH*2, BRICK_X+(BRICK_HEIGHT*2), BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK),
+        new GameObj(BRICK_WIDTH*3, BRICK_X+(BRICK_HEIGHT*2), BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK),
+        new GameObj(BRICK_WIDTH*4, BRICK_X+(BRICK_HEIGHT*2), BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK),
+        new GameObj(BRICK_WIDTH*5, BRICK_X+(BRICK_HEIGHT*2), BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK),
+        new GameObj(BRICK_WIDTH*6, BRICK_X+(BRICK_HEIGHT*2), BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK),
+        new GameObj(BRICK_WIDTH*7, BRICK_X+(BRICK_HEIGHT*2), BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK)
         
         
         };
@@ -138,7 +146,7 @@ public class Model
             {
                 updateGame();                        // update the game state
                 modelChanged();                      // Model changed - refresh screen
-                Thread.sleep( getFast() ? 10 : 20 ); // wait a few milliseconds
+                Thread.sleep( getFast() ? 3 : 6 ); // wait a few milliseconds
             }
             Debug.trace("Model::runGame: Game finished"); 
         } catch (Exception e) 
@@ -186,6 +194,15 @@ public class Model
         	gm.PlayBreakSound();
         	brick.visible = false;
         }}
+        
+        for (PersistentGameObj brick : healthbricks) {
+            if (brick.hitBy(ball) && brick.visible) {
+            	
+            	addToScore( HIT_BRICK);
+            	hit = true;
+            	gm.PlayBreakSound();
+            	brick.visible = false;
+            }}
         
 
         if (hit) {
@@ -255,6 +272,12 @@ public class Model
     public synchronized GameObj[] getBricks()
     {
         return(bricks);
+    }
+    
+    public synchronized PersistentGameObj[] getHealthBricks()
+    {
+    	return(healthbricks);
+    		
     }
     
     // return score

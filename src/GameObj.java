@@ -18,20 +18,20 @@ public class GameObj
     public Color colour;                // Colour of object
     public int   dirX   = 1;            // Direction X (1, 0 or -1)
     public int   dirY   = 1;            // Direction Y (1, 0 or -1)
-    public int objlives = 1;
 
 
-    public GameObj( int x, int y, int w, int h, Color c, int ol)
+    public GameObj( int x, int y, int w, int h, Color c)
     {
         topX   = x;       
         topY = y;
         width  = w; 
         height = h; 
         colour = c;
-        //objlives = ol;
+      
     }
 
-    // move in x axis
+
+	// move in x axis
     public void moveX( int units )
     {
         topX += units * dirX;

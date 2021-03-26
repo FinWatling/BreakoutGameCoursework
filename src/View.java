@@ -32,7 +32,8 @@ public class View
     public GameObj   bat;            // The bat
     public GameObj   ball;           // The ball
     public GameObj[] bricks;         // The bricks
-    public int       score =  0;     // The score
+    public PersistentGameObj[] healthbricks; //Bricks with health
+    public int score =  0;     // The score
    
     // constructor method - we get told the width and height of the window
     public View(int w, int h)
@@ -131,6 +132,14 @@ public class View
             displayGameObj(gc, brick);
             }
             	}
+           
+            //draws the bricks with health
+            
+            for (PersistentGameObj healthbrick : healthbricks) {
+                if (healthbrick.visible) {
+                displayPersistentGameObj(gc, healthbrick);
+                }
+                	}
 
             
             // update the score
@@ -144,6 +153,12 @@ public class View
         gc.setFill( go.colour );
         gc.fillRect( go.topX, go.topY, go.width, go.height );
     }
+    
+    public void displayPersistentGameObj( GraphicsContext gc, PersistentGameObj go )
+    {
+        gc.setFill( go.colour );
+        gc.fillRect( go.topX, go.topY, go.width, go.height );
+    }
 
     // This is how the Model talks to the View
     // This method gets called BY THE MODEL, whenever the model changes
@@ -153,6 +168,7 @@ public class View
         // Get from the model the ball, bat, bricks & score
         ball    = model.getBall();              // Ball
         bricks  = model.getBricks();            // Bricks
+        healthbricks = model.getHealthBricks();
         bat     = model.getBat();               // Bat
         score   = model.getScore();             // Score
         //Debug.trace("Update");
