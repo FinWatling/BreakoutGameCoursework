@@ -91,8 +91,14 @@ public class Model
         bat    = new GameObj(width/2, height - BRICK_HEIGHT*3/2, BRICK_WIDTH*2, BRICK_HEIGHT/4, Color.GREY);
         
         healthbricks = new PersistentGameObj[]{
-        new PersistentGameObj(0, BRICK_X+(BRICK_HEIGHT*3), BRICK_WIDTH, BRICK_HEIGHT, Color.GOLD, 3),
-        new PersistentGameObj(BRICK_WIDTH, BRICK_X+(BRICK_HEIGHT*3), BRICK_WIDTH, BRICK_HEIGHT, Color.GOLD, 3)
+        new PersistentGameObj(0, BRICK_X+(BRICK_HEIGHT*3), BRICK_WIDTH, BRICK_HEIGHT, Color.LIGHTGREEN, 3),
+        new PersistentGameObj(BRICK_WIDTH, BRICK_X+(BRICK_HEIGHT*3), BRICK_WIDTH, BRICK_HEIGHT, Color.LIGHTGREEN, 3),
+        new PersistentGameObj(BRICK_WIDTH*2, BRICK_X+(BRICK_HEIGHT*3), BRICK_WIDTH, BRICK_HEIGHT, Color.LIGHTGREEN, 3),
+        new PersistentGameObj(BRICK_WIDTH*3, BRICK_X+(BRICK_HEIGHT*3), BRICK_WIDTH, BRICK_HEIGHT, Color.LIGHTGREEN, 3),
+        new PersistentGameObj(BRICK_WIDTH*4, BRICK_X+(BRICK_HEIGHT*3), BRICK_WIDTH, BRICK_HEIGHT, Color.LIGHTGREEN, 3),
+        new PersistentGameObj(BRICK_WIDTH*5, BRICK_X+(BRICK_HEIGHT*3), BRICK_WIDTH, BRICK_HEIGHT, Color.LIGHTGREEN, 3),
+        new PersistentGameObj(BRICK_WIDTH*6, BRICK_X+(BRICK_HEIGHT*3), BRICK_WIDTH, BRICK_HEIGHT, Color.LIGHTGREEN, 3),
+        new PersistentGameObj(BRICK_WIDTH*7, BRICK_X+(BRICK_HEIGHT*3), BRICK_WIDTH, BRICK_HEIGHT, Color.LIGHTGREEN, 3)
         		
         		
         };
@@ -189,16 +195,30 @@ public class Model
         for (GameObj brick : bricks) {
         if (brick.hitBy(ball) && brick.visible) {
         	
-        	addToScore( HIT_BRICK);
+        	addToScore(HIT_BRICK);
         	hit = true;
         	gm.PlayBreakSound();
         	brick.visible = false;
         }}
         
+        
+        //The following code implements the objlives variable added with PersistentGameObj
+        
         for (PersistentGameObj brick : healthbricks) {
-            if (brick.hitBy(ball) && brick.visible) {
-            	
-            	addToScore( HIT_BRICK);
+        	if(brick.hitBy(ball) && brick.visible && (brick.objlives > 0)) {
+        		addToScore(HIT_BRICK);
+        		hit = true;
+        		brick.objlives--;
+        		brick.colour = Color.GOLD;
+        		if (brick.objlives == 1) {
+        			brick.colour = Color.RED;
+        			
+        		}
+        		
+        		}
+        	
+            if (brick.hitBy(ball) && brick.visible && (brick.objlives == 0)) {
+            	addToScore(HIT_BRICK+50);
             	hit = true;
             	gm.PlayBreakSound();
             	brick.visible = false;
