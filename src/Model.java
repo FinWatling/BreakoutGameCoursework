@@ -174,8 +174,17 @@ public class Model
         int y = ball.topY;
         int btx = bat.topX;
         // Deal with possible edge of board hit
-        if (x >= width - B - BALL_SIZE)  ball.changeDirectionX();
-        if (x <= 0 + B)  ball.changeDirectionX();
+        if (x >= width - B - BALL_SIZE) {
+        	
+        	ball.changeDirectionX();
+        	gm.PlayWallHitSound();
+        }
+        
+        if (x <= 0 + B) {
+        	
+        	ball.changeDirectionX();
+        	gm.PlayWallHitSound();
+        }
         
         //Bat now no longer phases through the game window
         
@@ -185,7 +194,8 @@ public class Model
         if (y >= height - B - BALL_SIZE)  // Bottom
         { 
             ball.changeDirectionY(); 
-            addToScore( HIT_BOTTOM );     // score penalty for hitting the bottom of the screen
+            addToScore( HIT_BOTTOM );  // score penalty for hitting the bottom of the screen
+            //TODO: add danger sound here
         }
         if (y <= 0 + M)  ball.changeDirectionY();
 

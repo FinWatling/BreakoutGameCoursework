@@ -42,6 +42,13 @@ public class GameMedia {
 		
 	}
 
+	
+public void PlayWallHitSound() {
+		
+		final AudioClip sound = new AudioClip(Paths.get("res/hitwall.wav").toUri().toString());
+		sound.play();
+		
+	}
 	  
 	  
 	  
