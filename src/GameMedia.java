@@ -28,12 +28,20 @@ public class GameMedia {
 	    
 	  }
 	
+	/**
+	 * Plays the Hit Sound when called
+	 */
+	
 	public void PlayHitSound() {
 		
 		final AudioClip sound = new AudioClip(Paths.get("res/ballhit.wav").toUri().toString());
 		sound.play();
 		
 	}
+	
+	/**
+	 * Plays the Block Break Sound when called
+	 */
 	
 	public void PlayBreakSound() {
 		
@@ -42,6 +50,9 @@ public class GameMedia {
 		
 	}
 
+	/**
+	 * Plays the Wall Hit Sound when called
+	 */
 	
 public void PlayWallHitSound() {
 		

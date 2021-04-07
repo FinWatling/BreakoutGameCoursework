@@ -133,7 +133,10 @@ public class Model
         new GameObj(BRICK_WIDTH*7, BRICK_X+(BRICK_HEIGHT*2), BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK)
         
         
+       
         };
+        
+    
         
         
         
@@ -152,7 +155,8 @@ public class Model
             {
                 updateGame();                        // update the game state
                 modelChanged();                      // Model changed - refresh screen
-                Thread.sleep( getFast() ? 3 : 6 ); // wait a few milliseconds
+                Thread.sleep( getFast() ? 3 : 6 ); // wait a few milliseconds/
+                //I have changed this sleep value so that the game updates more frequently, this is so that the game looks smooth on high refresh rate monitors.
             }
             Debug.trace("Model::runGame: Game finished"); 
         } catch (Exception e) 
@@ -161,7 +165,7 @@ public class Model
         }
     }
   
-    // updating the game - this happens about 50 times a second to give the impression of movement
+    // updating the game
     public synchronized void updateGame()
     {
         GameMedia gm = new GameMedia();
