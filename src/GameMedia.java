@@ -4,8 +4,9 @@ import javafx.scene.media.AudioClip;
 import javafx.scene.media.MediaPlayer;
 
 /**
- * The GameMedia class adds the functionality to play sound to my project using javafx's built-in "Media Player"
- * Currently this only plays the theme tune whilst the game is running but I am going to add game specific sounds soon!
+ * The GameMedia class adds the functionality to play sound to my project using javafx's built-in "MediaPlayer" and "AudioClip" imports.
+ * The Mediaplayer object is used to play the game's main theme and I'm using the AudioClip object to play the game specific sounds. 
+ * I am doing it this way as AudioClip can be called over and over with minimal latency, whereas the MediaPlayer needs to be reset to time 0 before playing the sound again. 
  * 
  * @author Finlay Watling
  * 
