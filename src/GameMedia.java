@@ -61,6 +61,16 @@ public void PlayWallHitSound() {
 		
 	}
 	  
+	/**
+	 *  Plays the Brick Cracking Sound when called
+	 */
+
+public void PlayBrickCrackSound() {
+	
+	final AudioClip sound = new AudioClip(Paths.get("res/crack.wav").toUri().toString());
+	sound.play();
+	
+}
 	  
 	  
 	  

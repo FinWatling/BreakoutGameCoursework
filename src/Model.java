@@ -224,8 +224,10 @@ public class Model
         		hit = true;
         		brick.objlives--;
         		brick.colour = Color.GOLD;
+        		gm.PlayBrickCrackSound();
         		if (brick.objlives == 1) {
         			brick.colour = Color.RED;
+        			gm.PlayBrickCrackSound();
         			
         		}
         		
