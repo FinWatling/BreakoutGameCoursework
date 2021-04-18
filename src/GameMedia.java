@@ -24,7 +24,7 @@ public class GameMedia {
 		final String theme = "res/backgroundMusic.mp3";
 	    Media media = new Media(Paths.get(theme).toUri().toString());
 	    MediaPlayer player = new MediaPlayer(media);
-	    player.setVolume(0); //no volume for testing the rest of the program.. very annoying after a few hours!!
+	    player.setVolume(0.4); //no volume for testing the rest of the program.. very annoying after a few hours!!
 	    player.play();
 	    
 	  }

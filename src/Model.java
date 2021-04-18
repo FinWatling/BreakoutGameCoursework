@@ -23,7 +23,7 @@ public class Model
 
     public int HIT_BRICK      = 100;     // Points for hitting a brick
     public int HIT_BOTTOM     = -100;   // Points Penalty for hitting the bottom of the screen
-    public int BRICK_X = 100; 			// Used to display rows of bricks
+    public int BRICK_X 		  = 100; 			// Used to display rows of bricks
 
     // The other parts of the model-view-controller setup
     View view;
@@ -174,17 +174,14 @@ public class Model
         ball.moveX(BALL_MOVE);                      
         ball.moveY(BALL_MOVE);
         // get the current ball possition (top left corner)
-        int x = ball.topX;  
-        int y = ball.topY;
-        int btx = bat.topX;
         // Deal with possible edge of board hit
-        if (x >= width - B - BALL_SIZE) {
+        if (ball.topX >= width - B - BALL_SIZE) {
         	
         	ball.changeDirectionX();
         	gm.PlayWallHitSound();
         }
         
-        if (x <= 0 + B) {
+        if (ball.topX <= 0 + B) {
         	
         	ball.changeDirectionX();
         	gm.PlayWallHitSound();
@@ -192,16 +189,16 @@ public class Model
         
         //Bat now no longer phases through the game window
         
-        if (btx >= width - B - bat.width && bat.dirX != 0) bat.moveX(-BAT_MOVE); //if the bat hits the border of the wall move the bat back one movement
-        if (btx <= 0 + B)  bat.moveX(BAT_MOVE); // if the bat hits the border of the wall move the bat forward one movement
+        if (bat.topX >= width - B - bat.width && bat.dirX != 0) bat.moveX(-BAT_MOVE); //if the bat hits the border of the wall move the bat back one movement
+        if (bat.topX <= 0 + B)  bat.moveX(BAT_MOVE); // if the bat hits the border of the wall move the bat forward one movement
         
-        if (y >= height - B - BALL_SIZE)  // Bottom
+        if (ball.topX >= height - B - BALL_SIZE)  // Bottom
         { 
             ball.changeDirectionY(); 
             addToScore( HIT_BOTTOM );  // score penalty for hitting the bottom of the screen
             //TODO: add danger sound here
         }
-        if (y <= 0 + M)  ball.changeDirectionY();
+        if (ball.topY <= 0 + M)  ball.changeDirectionY();
 
        // check whether ball has hit a (visible) brick
         boolean hit = false;

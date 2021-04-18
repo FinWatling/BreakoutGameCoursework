@@ -23,7 +23,7 @@ public class GameObj
     public GameObj( int x, int y, int w, int h, Color c)
     {
         topX   = x;       
-        topY = y;
+        topY   = y;
         width  = w; 
         height = h; 
         colour = c;

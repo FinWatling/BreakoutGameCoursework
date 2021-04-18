@@ -41,10 +41,8 @@ public class Main extends Application
         // Each one has instance variables for the other two
         model.view = view;
         model.controller = controller;
-        
         controller.model = model;
         controller.view = view;
-        
         view.model = model;
         view.controller = controller;
 
