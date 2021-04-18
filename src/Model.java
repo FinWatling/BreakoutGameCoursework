@@ -192,7 +192,7 @@ public class Model
         if (bat.topX >= width - B - bat.width && bat.dirX != 0) bat.moveX(-BAT_MOVE); //if the bat hits the border of the wall move the bat back one movement
         if (bat.topX <= 0 + B)  bat.moveX(BAT_MOVE); // if the bat hits the border of the wall move the bat forward one movement
         
-        if (ball.topX >= height - B - BALL_SIZE)  // Bottom
+        if (ball.topY >= height - B - BALL_SIZE)  // Bottom
         { 
             ball.changeDirectionY(); 
             addToScore( HIT_BOTTOM );  // score penalty for hitting the bottom of the screen
