@@ -4,6 +4,8 @@
 
 // We import lots of JavaFX libraries (we may not use them all, but it
 // saves us having to thinkabout them if we add new code)
+import java.util.ArrayList;
+
 import javafx.event.EventHandler;
 import javafx.scene.input.*;
 import javafx.scene.canvas.*;
@@ -33,6 +35,8 @@ public class View
     public GameObj   ball;           // The ball
     public GameObj[] bricks;         // The bricks
     public PersistentGameObj[] healthbricks; //Bricks with health
+    public ArrayList<GameObj> albricks;
+    public ArrayList<PersistentGameObj> alhealthbricks;
     public int score =  0;     // The score
    
     // constructor method - we get told the width and height of the window
@@ -130,7 +134,7 @@ public class View
             for (GameObj brick : bricks) {
             if (brick.visible) {
             displayGameObj(gc, brick);
-            }
+           }
             	}
            
             //draws the bricks with health
@@ -140,6 +144,15 @@ public class View
                 displayPersistentGameObj(gc, healthbrick);
                 }
                 	}
+            
+            //TODO: get this working 
+            //draws the arraylist bricks
+//            
+//            for (GameObj brick : albricks) {
+//                if (brick.visible) {
+//                displayGameObj(gc, brick);
+//                }
+//                	}
 
             
             // update the score

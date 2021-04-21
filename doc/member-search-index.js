@@ -1,1 +1,1 @@
-memberSearchIndex = [{"p":"<Unnamed>","c":"GameMedia","l":"GameMedia()","u":"%3Cinit%3E()"},{"p":"<Unnamed>","c":"GameMedia","l":"playMainTheme()"}];updateSearchResults();
+memberSearchIndex = [{"p":"<Unnamed>","c":"GameMedia","l":"GameMedia()","u":"%3Cinit%3E()"},{"p":"<Unnamed>","c":"GameMedia","l":"PlayBreakSound()"},{"p":"<Unnamed>","c":"GameMedia","l":"PlayBrickCrackSound()"},{"p":"<Unnamed>","c":"GameMedia","l":"PlayHitSound()"},{"p":"<Unnamed>","c":"GameMedia","l":"playMainTheme()"},{"p":"<Unnamed>","c":"GameMedia","l":"PlayWallHitSound()"}];updateSearchResults();

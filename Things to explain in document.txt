@@ -1,0 +1,20 @@
+Mediaplayer vs AudioClip and the challenges i overcame to implement sound to the game
+talk about latency and why it's an issue in a game
+
+using java paths to get files imported
+
+Mouse movement and how i implemented it, purely using research i found online 
+--> includes type casting to int
+
+inheritence demonstrated by the PersistentGameObj class/objects
+objlives + colour changes etc
+
+changing the update rate of the game so that it looks smooth on higher refresh rate monitors
+
+preventing the bat from going off the screen
+
+changing the css to make the game look more simplistic and clean
+
+
+
+
