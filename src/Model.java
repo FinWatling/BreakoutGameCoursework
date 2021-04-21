@@ -7,7 +7,7 @@
 
 import javafx.scene.paint.*;
 import javafx.application.Platform;
-import java.util.ArrayList;
+//import java.util.ArrayList;
 
 public class Model 
 {
@@ -34,8 +34,8 @@ public class Model
     // and are used by the View to display it
     public GameObj ball;                // The ball
     public GameObj[] bricks;    		// The bricks
-    public ArrayList<GameObj> albricks = new ArrayList<GameObj>();
-    public ArrayList<PersistentGameObj> alhealthbricks;
+//    public ArrayList<GameObj> albricks = new ArrayList<GameObj>();
+//    public ArrayList<PersistentGameObj> alhealthbricks;
     public PersistentGameObj[] healthbricks;// Bricks with Health
     public GameObj bat;                 // The bat
     public int score = 0;               // The score
@@ -106,6 +106,7 @@ public class Model
         		
         };
         
+        //TODO: Implement Arraylist and loop
 //        int rows = 8;
 //        int cols = 3;
 //        

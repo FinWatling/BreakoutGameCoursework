@@ -4,7 +4,7 @@
 
 // We import lots of JavaFX libraries (we may not use them all, but it
 // saves us having to thinkabout them if we add new code)
-import java.util.ArrayList;
+//import java.util.ArrayList;
 
 import javafx.event.EventHandler;
 import javafx.scene.input.*;
@@ -12,6 +12,7 @@ import javafx.scene.canvas.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.*;
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -35,8 +36,8 @@ public class View
     public GameObj   ball;           // The ball
     public GameObj[] bricks;         // The bricks
     public PersistentGameObj[] healthbricks; //Bricks with health
-    public ArrayList<GameObj> albricks;
-    public ArrayList<PersistentGameObj> alhealthbricks;
+//    public ArrayList<GameObj> albricks = new ArrayList<GameObj>();
+//    public ArrayList<PersistentGameObj> alhealthbricks;
     public int score =  0;     // The score
    
     // constructor method - we get told the width and height of the window
@@ -83,7 +84,7 @@ public class View
         // view object itself') we tell JavaFX to call the 'handle' method (below)
         // whenever a key is pressed
         
-       
+        
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
         		
         	public void handle(KeyEvent event) {  //attempting to get the bat to follow the mouse instead of using keys to control direction.
@@ -103,6 +104,7 @@ public class View
 				}
 
 			});
+        scene.setCursor(Cursor.NONE);
         
         // put the scene in the window and display it
         window.setScene(scene);
@@ -147,7 +149,7 @@ public class View
             
             //TODO: get this working 
             //draws the arraylist bricks
-//            
+            
 //            for (GameObj brick : albricks) {
 //                if (brick.visible) {
 //                displayGameObj(gc, brick);
