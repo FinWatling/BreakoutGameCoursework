@@ -59,11 +59,12 @@ public class Controller {
     }
   }
   
+  
 	
 	  public void userMouseInteraction(MouseEvent e) {
 		  
-		  if(e.getX() < 450){
-		  model.moveBatMouse((int) e.getX());
+		  if(e.getX() < 450){  //if the x position of the mouse is less than 450
+		  model.moveBatMouse((int) e.getX()); //typecast the double output from the event to an int and set the bat's location to that int.
 		  }
 		  
 	  }

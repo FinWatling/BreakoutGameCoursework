@@ -15,9 +15,9 @@ public class Model
     public int B              = 6;      // Border round the edge of the panel
     public int M              = 40;     // Height of menu bar space at the top
 
-    public int BALL_SIZE      = 30;  
-    public int BRICK_WIDTH    = 75;     
-    public int BRICK_HEIGHT   = 40;		
+    public int BALL_SIZE      = 30;  	//the size of the ball
+    public int BRICK_WIDTH    = 75;     //width of each brick
+    public int BRICK_HEIGHT   = 40;		//height of each brick
 
     public int BAT_MOVE       = 8;      // Distance to move bat on each keypress
     public int BALL_MOVE      = 2;      // Units to move the ball on each step
@@ -34,11 +34,11 @@ public class Model
     // and are used by the View to display it
     public GameObj ball;                // The ball
     public GameObj[] bricks;    		// The bricks
+    public PersistentGameObj[] healthbricks;// Bricks with Health
 //    public ArrayList<GameObj> albricks = new ArrayList<GameObj>();
 //    public ArrayList<PersistentGameObj> alhealthbricks;
-    public PersistentGameObj[] healthbricks;// Bricks with Health
     public GameObj bat;                 // The bat
-    public int score = 0;               // The score
+    private int score = 0;               // The score
 
     // variables that control the game 
     public String gameState = "running";// Set to "finished" to end the game
@@ -86,7 +86,6 @@ public class Model
     }   
     
     // Initialise the game - reset the score and create the game objects 
-    //TODO: Get this nice and neat in a loop.
     public void initialiseGame()
     {       
         score = 0;
@@ -145,11 +144,7 @@ public class Model
         new GameObj(BRICK_WIDTH*4, BRICK_X+(BRICK_HEIGHT*2), BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK),
         new GameObj(BRICK_WIDTH*5, BRICK_X+(BRICK_HEIGHT*2), BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK),
         new GameObj(BRICK_WIDTH*6, BRICK_X+(BRICK_HEIGHT*2), BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK),
-        new GameObj(BRICK_WIDTH*7, BRICK_X+(BRICK_HEIGHT*2), BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK)
-        
-        
-      
-        };
+        new GameObj(BRICK_WIDTH*7, BRICK_X+(BRICK_HEIGHT*2), BRICK_WIDTH, BRICK_HEIGHT, Color.BLACK)};
         
     
         
@@ -170,7 +165,7 @@ public class Model
             {
                 updateGame();                        // update the game state
                 modelChanged();                      // Model changed - refresh screen
-                Thread.sleep( getFast() ? 3 : 6 ); // wait a few milliseconds/
+                Thread.sleep( getFast() ? 3 : 6 ); // sleep for 3ms or 6ms depending on if getfast is enabled or disabled
                 //I have changed this sleep value so that the game updates more frequently, this is so that the game looks smooth on high refresh rate monitors.
             }
             Debug.trace("Model::runGame: Game finished"); 
@@ -181,7 +176,7 @@ public class Model
     }
   
     // updating the game
-    public synchronized void updateGame()
+    private synchronized void updateGame()
     {
         GameMedia gm = new GameMedia();
         
@@ -211,45 +206,44 @@ public class Model
         { 
             ball.changeDirectionY(); 
             addToScore( HIT_BOTTOM );  // score penalty for hitting the bottom of the screen
-            //TODO: add danger sound here
+            
         }
         if (ball.topY <= 0 + M)  ball.changeDirectionY();
 
        // check whether ball has hit a (visible) brick
         boolean hit = false;
-        
         for (GameObj brick : bricks) {
-        if (brick.hitBy(ball) && brick.visible) {
+        if (brick.hitBy(ball) && brick.visible) { //if a brick is visible and is hit by the ball
         	
-        	addToScore(HIT_BRICK);
-        	hit = true;
-        	gm.PlayBreakSound();
-        	brick.visible = false;
+        	addToScore(HIT_BRICK);				  //add the hit brick value to the score
+        	hit = true;							 //change the Bool "hit" to true
+        	gm.PlayBreakSound();				 //play the break sound effect 
+        	brick.visible = false; 			     //and make the brick no longer visible
         }}
         
         
         //The following code implements the objlives variable added with PersistentGameObj
         
         for (PersistentGameObj brick : healthbricks) {
-        	if(brick.hitBy(ball) && brick.visible && (brick.objlives > 0)) {
+        	if(brick.hitBy(ball) && brick.visible && (brick.objlives > 0)) {//if a brick is visible and is hit by the ball and the lives are more than 0
         		addToScore(HIT_BRICK);
         		hit = true;
-        		brick.objlives--;
-        		brick.colour = Color.GOLD;
-        		gm.PlayBrickCrackSound();
-        		if (brick.objlives == 1) {
-        			brick.colour = Color.RED;
-        			gm.PlayBrickCrackSound();
+        		brick.objlives--; //remove a life from that brick
+        		brick.colour = Color.GOLD; //change its colour
+        		gm.PlayBrickCrackSound(); //play the cracking sound
+        		if (brick.objlives == 1) { //if the brick has only one life left
+        			brick.colour = Color.RED; //set the colour to red
+        			gm.PlayBrickCrackSound(); //play the crack sound
         			
         		}
         		
         		}
         	
-            if (brick.hitBy(ball) && brick.visible && (brick.objlives == 0)) {
-            	addToScore(HIT_BRICK+50);
-            	hit = true;
-            	gm.PlayBreakSound();
-            	brick.visible = false;
+            if (brick.hitBy(ball) && brick.visible && (brick.objlives == 0)) { //only make the brick invisible if it has run out of lives
+            	addToScore(HIT_BRICK+50); //on the last hit of the healthbricks, a bonus of 50 points is earned
+            	hit = true; 
+            	gm.PlayBreakSound(); //play the final breaking sound
+            	brick.visible = false; //make the brick invisible 
             }}
         
 
@@ -335,7 +329,7 @@ public class Model
     }
     
      // update the score
-    public synchronized void addToScore(int n)    
+    private synchronized void addToScore(int n)    
     {
         score += n;
         
@@ -356,7 +350,7 @@ public class Model
     //sets the bat's X position to the position of the mouse
     public synchronized void moveBatMouse(int x)
     {
-    	bat.setX(x);
+    	bat.setX(x); //sets the bat's x position to the mouse's location
     }
     
     

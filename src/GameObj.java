@@ -43,7 +43,7 @@ public class GameObj
         topY += units * dirY;
     }
     
-    //sets the bat's X position
+    //sets the bat's X position, used with the usermouseinteraction method in Controller and movebatmouse in Model.
     public void setX(int x) {
 		topX = x;
 		

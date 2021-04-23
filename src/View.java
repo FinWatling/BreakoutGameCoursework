@@ -38,7 +38,7 @@ public class View
     public PersistentGameObj[] healthbricks; //Bricks with health
 //    public ArrayList<GameObj> albricks = new ArrayList<GameObj>();
 //    public ArrayList<PersistentGameObj> alhealthbricks;
-    public int score =  0;     // The score
+    private int score =  0;     // The score
    
     // constructor method - we get told the width and height of the window
     public View(int w, int h)
@@ -95,7 +95,7 @@ public class View
         		
         	});
         
-        scene.setOnMouseMoved(new EventHandler<javafx.scene.input.MouseEvent>() { //this was one of the hardest things I have EVER had to do!
+        scene.setOnMouseMoved(new EventHandler<javafx.scene.input.MouseEvent>() { //new event handler for when the mouse is moved inside the window
         	
 			public void handle(javafx.scene.input.MouseEvent e) {  //attempting to get the bat to follow the mouse instead of using keys to control direction.
 				  // send the event to the controller
@@ -104,7 +104,7 @@ public class View
 				}
 
 			});
-        scene.setCursor(Cursor.NONE);
+        scene.setCursor(Cursor.NONE); //remove the cursor when it is inside the game window.
         
         // put the scene in the window and display it
         window.setScene(scene);
@@ -134,16 +134,16 @@ public class View
             //draw the bricks
             
             for (GameObj brick : bricks) {
-            if (brick.visible) {
-            displayGameObj(gc, brick);
+            if (brick.visible) { //if boolean visible is true
+            displayGameObj(gc, brick); //display the brick
            }
             	}
            
             //draws the bricks with health
             
             for (PersistentGameObj healthbrick : healthbricks) {
-                if (healthbrick.visible) {
-                displayPersistentGameObj(gc, healthbrick);
+                if (healthbrick.visible) { //if boolean visible is true
+                displayPersistentGameObj(gc, healthbrick); //display the brick
                 }
                 	}
             
@@ -169,7 +169,7 @@ public class View
         gc.fillRect( go.topX, go.topY, go.width, go.height );
     }
     
-    public void displayPersistentGameObj( GraphicsContext gc, PersistentGameObj go )
+    public void displayPersistentGameObj( GraphicsContext gc, PersistentGameObj go ) //displays the new persistentgameobj objects
     {
         gc.setFill( go.colour );
         gc.fillRect( go.topX, go.topY, go.width, go.height );
