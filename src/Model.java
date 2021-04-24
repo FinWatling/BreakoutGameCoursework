@@ -183,7 +183,7 @@ public class Model
         // move the ball one step (the ball knows which direction it is moving in)
         ball.moveX(BALL_MOVE);                      
         ball.moveY(BALL_MOVE);
-        // get the current ball possition (top left corner)
+        // get the current ball position (top left corner)
         // Deal with possible edge of board hit
         if (ball.topX >= width - B - BALL_SIZE) {
         	
@@ -225,7 +225,8 @@ public class Model
         //The following code implements the objlives variable added with PersistentGameObj
         
         for (PersistentGameObj brick : healthbricks) {
-        	if(brick.hitBy(ball) && brick.visible && (brick.objlives > 0)) {//if a brick is visible and is hit by the ball and the lives are more than 0
+        	//if a brick is visible and is hit by the ball and the lives are more than 0
+        	if(brick.hitBy(ball) && brick.visible && (brick.objlives > 0)) {
         		addToScore(HIT_BRICK);
         		hit = true;
         		brick.objlives--; //remove a life from that brick

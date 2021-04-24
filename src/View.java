@@ -95,7 +95,7 @@ public class View
         		
         	});
         
-        scene.setOnMouseMoved(new EventHandler<javafx.scene.input.MouseEvent>() { //new event handler for when the mouse is moved inside the window
+        scene.setOnMouseMoved(new EventHandler<MouseEvent>() { //new event handler for when the mouse is moved inside the window
         	
 			public void handle(javafx.scene.input.MouseEvent e) {  //attempting to get the bat to follow the mouse instead of using keys to control direction.
 				  // send the event to the controller
