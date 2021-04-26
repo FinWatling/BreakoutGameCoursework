@@ -166,7 +166,7 @@ public class Model
                 updateGame();                        // update the game state
                 modelChanged();                      // Model changed - refresh screen
                 Thread.sleep( getFast() ? 3 : 6 ); // sleep for 3ms or 6ms depending on if getfast is enabled or disabled
-                //I have changed this sleep value so that the game updates more frequently, this is so that the game looks smooth on high refresh rate monitors.
+     //I have changed this sleep value so that the game updates more frequently, this is so that the game looks smooth on high refresh rate monitors.
             }
             Debug.trace("Model::runGame: Game finished"); 
         } catch (Exception e) 
@@ -199,7 +199,8 @@ public class Model
         
         //Bat now no longer phases through the game window
         
-        if (bat.topX >= width - B - bat.width && bat.dirX != 0) bat.moveX(-BAT_MOVE); //if the bat hits the border of the wall move the bat back one movement
+      //if the bat hits the border of the wall move the bat back one movement
+        if (bat.topX >= width - B - bat.width && bat.dirX != 0) bat.moveX(-BAT_MOVE); 
         if (bat.topX <= 0 + B)  bat.moveX(BAT_MOVE); // if the bat hits the border of the wall move the bat forward one movement
         
         if (ball.topY >= height - B - BALL_SIZE)  // Bottom
