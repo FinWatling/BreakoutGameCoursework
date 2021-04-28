@@ -22,8 +22,8 @@ public class GameMedia {
 	 */
 	public void playMainTheme() {
 		
-		final String theme = "res/backgroundMusic.mp3"; //the simple path to the file
-		//below creates a new media object, converts the theme string to a uri then back to a string and 
+		final String theme = "res/backgroundMusic.mp3"; //the relative path to the file
+		//below creates a new media object, converts the theme string to a uri then back to a string and applies it as the content to the media object.
 	    Media media = new Media(Paths.get(theme).toUri().toString()); 
 	    MediaPlayer player = new MediaPlayer(media); //creates a new mediaplayer object called player that contains the media
 	    player.setVolume(0.1); 
@@ -36,8 +36,9 @@ public class GameMedia {
 	 */
 	
 	public void PlayHitSound() {
-		
-		final AudioClip sound = new AudioClip(Paths.get("res/ballhit.wav").toUri().toString());
+	
+		//demonstrating how paths.get can be used with an inline string instead of a pre existing variable.
+		final AudioClip sound = new AudioClip(Paths.get("res/ballhit.wav").toUri().toString()); 
 		sound.play();
 		
 	}
